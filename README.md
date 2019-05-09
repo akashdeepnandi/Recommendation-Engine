@@ -1,0 +1,1 @@
+This is mini-project assigned by college.
