@@ -1,0 +1,21 @@
+nav {
+  min-height: 60px;
+}
+  .form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn {
+    font-size: 16px;
+  cursor: pointer;
+}
+
+.rounded-left{
+  border-radius: 50px;
+}

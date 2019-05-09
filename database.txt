@@ -1,0 +1,64 @@
+CREATE TABLE item(
+	i_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    i_name varchar(128) NOT NULL,
+   	i_description varchar(1000) NOT NULL,
+    i_image varchar(128) NOT NULL,
+    i_price float NOT NULL
+);
+
+CREATE TABLE customer(
+	c_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_name varchar(128) NOT NULL,
+   	c_phone varchar(10) NOT NULL
+);
+
+CREATE TABLE purchase(
+	p_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_id int(11) NOT NULL
+);
+
+CREATE TABLE purchase_items(
+	pi_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_id int(11) NOT NULL,
+   	p_id int(11) NOT NULL,
+   	i_id int(11) NOT NULL,
+    qty int NOT NULL,
+    total_price float NOT NULL
+);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("French Fries","Fried potato strips served with Tomato sauce","./static/images/1.jpg",110);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Corn Fritters","Sweet corn kernels and spring onion fritters served with tomato sauce","./static/images/2.jpg",130);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Aloo Dhanya Tikki","Deep fried potato, cheese and coriander pattice flavored with North Indian spices","./static/images/3.jpg",130),
+("Fish Cube Masala Fry","Deep fried fish cubes dusted with Kerala spices","./static/images/4.jpg",170)
+;
+
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Tomato and Basil Soup","A thick tomato soup flavored with basil and celery","./static/images/5.jpg",120),
+("Cock-a-leekie","Scottish clear soup with chicken and bacon","./static/images/6.jpg",150),
+("Sweet Corn Chicken Soup","Thick Chinese soup with chicken and corns","./static/images/7.jpg",150),
+("Prawn Bisque","Thick creamy Shellfish soup served with Garlic Bread","./static/images/8.jpg",160)
+;
+
+
+INSERT INTO item(i_name, i_description, i_image, i_price) 
+VALUES 
+("Dal Palak","Gently spiced preparation of dal and spinach leaves cooked with lentils","./static/images/9.jpg",125),
+("Diwani Hundi","Fresh mixed vegetables cooked with turmeric and coriander","./static/images/10.jpg",125),
+("Butter Palak Paneer","Paneer cooked in a gravy of palak and buttermasala","./static/images/11.jpg",150),
+("Malabar Kozhi Curry","Rustic chicken curry made with coconut milk and flavored with robust Kerala spices","./static/images/12.jpg",195),
+("Chicken Mappas","Gently spiced Kerala preparation of chicken simmered in thick coconut milk","./static/images/13.jpg",195),
+("Kadai Murg","A fiery Punjabi Chicken preparation with bell peppers and onion (spicy or less spicy)","./static/images/14.jpg",195)
+;
+
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Butter Naan","Indian Bread made with Flour cooked with butter in tandoor","./static/images/15.jpg",60),
+("Jeera Rice","Rice steamed with Jeera","./static/images/16.jpg",90),
+("Veg Pulao","t is a spicy rice dish prepared by cooking rice with various vegetables and spices","./static/images/17.jpg",110),
+("Chicken Pulao","One pot flavored chicken pilaf cooked with mild Indian spices","./static/images/18.jpg",175),
+("Veg Hakka Noodles","It is an Indo-Chinese preparation that is made by tossing boiled noodles and stir fried vegetables in Chinese sauces","./static/images/19.jpg",110),
+("Chicken Hakka Noodles","It is a Chinese dish of boiled noodles tossed with boiled and shredded chicken and vegetables in Chinese sauces","./static/images/20.jpg",150)
+;
+
