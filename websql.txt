@@ -1,0 +1,7 @@
+db.transaction(function(tx)tx.executeSql("DROP TABLE cart_item",[], 
+    function(tx,results){console.log("Successfully Dropped")},
+    function(tx,error){console.log("Could not delete")}
+);
+db.transaction(function (tx) {
+    tx.executeSql("DROP TABLE cart_item");
+});
