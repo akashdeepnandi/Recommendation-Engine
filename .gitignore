@@ -1,15 +1,27 @@
+1.33.1-main.sock     
+1.33.1-shared.sock   
 Backups/
-Cache/
+blob_storage/         
+GPUCache/
+Cache/            
+img/                         
+storage.json
 CachedData/
 CachedExtensions/
-Cookies
-Cookies-journal
-GPUCache/
-Network Persistent State
-User/
-languagepacks.json
+test1.php
+cart1.php
 logs/
-machineid
+cart.js              
+machineid                   
+test.php
+Network Persistent State   
+User/
+order-1.php
+webrtc_event_logs/
+Cookies
+languagepacks.json
+order.php                   
+xyz.php
+Cookies-journal      
 rapid_render.json
-storage.json
-
+cus.php
