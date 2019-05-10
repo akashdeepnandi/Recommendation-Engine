@@ -99,16 +99,16 @@
             
             switch ($val) {
                 case 'STARTERS':
-                $c=2;
+                $c=4;
                 break;
                 case 'SOUPS':
                 $c=2;
                 break;
                 case 'MAIN COURSE':
-                $c=3;
+                $c=5;
                 break;
                 case 'BREADS AND RICE':
-                $c=3;
+                $c=4;
                 break;
             }
             echo '<div class="row p-2 rounded-left" style="background-color:#5CB85C; margin-left:0px; margin-top:10px; width: 20%"><div class="align-middle" style="color:white">'.$val.'</div></div>';

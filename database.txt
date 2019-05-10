@@ -26,7 +26,10 @@ CREATE TABLE purchase_items(
     total_price float NOT NULL
 );
 
-INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("French Fries","Fried potato strips served with Tomato sauce","./static/images/1.jpg",110);
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("French Fries","Fried potato strips served with Tomato sauce","./static/images/1.jpg",110),
+(i_name, i_description, i_image, i_price) VALUES ("Corn Fritters","Sweet corn kernels and spring onion fritters served with tomato sauce","./static/images/2.jpg",130),
+(i_name, i_description, i_image, i_price) VALUES ("Aloo Dhanya Tikki","Deep fried potato, cheese and coriander pattice flavored with North Indian spices","./static/images/3.jpg",130),
+("Fish Cube Masala Fry","Deep fried fish cubes dusted with Kerala spices","./static/images/4.jpg",170);
 
 INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Corn Fritters","Sweet corn kernels and spring onion fritters served with tomato sauce","./static/images/2.jpg",130);
 
@@ -36,10 +39,10 @@ INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Aloo Dhanya T
 
 
 INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
-("Tomato and Basil Soup","A thick tomato soup flavored with basil and celery","./static/images/5.jpg",120),
-("Cock-a-leekie","Scottish clear soup with chicken and bacon","./static/images/6.jpg",150),
-("Sweet Corn Chicken Soup","Thick Chinese soup with chicken and corns","./static/images/7.jpg",150),
-("Prawn Bisque","Thick creamy Shellfish soup served with Garlic Bread","./static/images/8.jpg",160)
+("Tomato and Basil Soup","A thick tomato soup flavored with basil and celery","./static/images/9.jpg",120),
+("Cock-a-leekie","Scottish clear soup with chicken and bacon","./static/images/10.jpg",150),
+("Sweet Corn Chicken Soup","Thick Chinese soup with chicken and corns","./static/images/11.jpg",150),
+("Prawn Bisque","Thick creamy Shellfish soup served with Garlic Bread","./static/images/12.jpg",160)
 ;
 
 
@@ -59,6 +62,58 @@ INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Butter Naan",
 ("Veg Pulao","t is a spicy rice dish prepared by cooking rice with various vegetables and spices","./static/images/17.jpg",110),
 ("Chicken Pulao","One pot flavored chicken pilaf cooked with mild Indian spices","./static/images/18.jpg",175),
 ("Veg Hakka Noodles","It is an Indo-Chinese preparation that is made by tossing boiled noodles and stir fried vegetables in Chinese sauces","./static/images/19.jpg",110),
-("Chicken Hakka Noodles","It is a Chinese dish of boiled noodles tossed with boiled and shredded chicken and vegetables in Chinese sauces","./static/images/20.jpg",150)
+("Chicken Hakka Noodles","It is a Chinese dish of boiled noodles tossed with boiled and shredded chicken and vegetables in Chinese sauces","./static/images/20.jpg",150);
+
+
+
+//NEW INSERTIONS#################################
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("French Fries","Fried potato strips served with Tomato sauce","./static/images/1.jpg",110),
+("Corn Fritters","Sweet corn kernels and spring onion fritters served with tomato sauce","./static/images/2.jpg",130),
+("Aloo Dhanya Tikki","Deep fried potato, cheese and coriander pattice flavored with North Indian spices","./static/images/3.jpg",130),
+("Fish Cube Masala Fry","Deep fried fish cubes dusted with Kerala spices","./static/images/4.jpg",170);
+
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Crispy Chilly Chicken","A popular and delicious Hakka, Indian Chinese takeout dish, dry chilli chicken is made with crispy chicken chunks and lightly tossed in a spicy chilli sauce","./static/images/5.jpg",200),("Veg Manchurian","This dish is made of deep fried mixed vegetable dumplings tossed in Chinese sauces","./static/images/6.jpg",160);
+
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Chicken Manchurian"," flavoured with soy sauce, tomato sauce, ginger, green chilli, vinegar giving an authentic taste of chicken manchurian", "./static/images/7.jpg", 220),
+("Dal Pakoda", "Prepared the pakodas using split moong dal, which gives the pakodas a light and airy texture. And the addition of palak makes it even more crispier", "./static/images/8.jpg", 180);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Tomato and Basil Soup","A thick tomato soup flavored with basil and celery","./static/images/9.jpg",120),
+("Cock-a-leekie","Scottish clear soup with chicken and bacon","./static/images/10.jpg",150),
+("Sweet Corn Chicken Soup","Thick Chinese soup with chicken and corns","./static/images/11.jpg",150),
+("Prawn Bisque","Thick creamy Shellfish soup served with Garlic Bread","./static/images/12.jpg",160)
 ;
 
+//main-course
+INSERT INTO item(i_name, i_description, i_image, i_price) 
+VALUES 
+("Dal Palak","Gently spiced preparation of dal and spinach leaves cooked with lentils","./static/images/13.jpg",125),
+("Diwani Hundi","Fresh mixed vegetables cooked with turmeric and coriander","./static/images/14.jpg",125),
+("Butter Palak Paneer","Paneer cooked in a gravy of palak and buttermasala","./static/images/15.jpg",150),
+("Malabar Kozhi Curry","Rustic chicken curry made with coconut milk and flavored with robust Kerala spices","./static/images/16.jpg",195),
+("Chicken Mappas","Gently spiced Kerala preparation of chicken simmered in thick coconut milk","./static/images/17.jpg",195),
+("Kadai Murg","A fiery Punjabi Chicken preparation with bell peppers and onion (spicy or less spicy)","./static/images/18.jpg",195);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Mutton Kosha", "Kosha is similar in meaning to bhuna, which involves slowly cooking a gravy to get a rich, dark-brown gravy and melt-in-the-mouth mutton pieces", "./static/images/19.jpg", 280),
+("Schezwan Chilli Chicken", "Chicken with chilies is a popular Indo Chinese fusion dish with unique, bold flavours", "./static/images/20.jpg", 240);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Sweet and Sour Chicken", "Popular dish, because that combination of crunchy chicken, sweet juicy pineapple and crisp peppers just cannot be beat", "./static/images/21.jpg", 250),
+("Sesame Chicken", "Crispy Chicken pieces tossed in a sweet and savory honey sesame sauce", "./static/images/22.jpg", 230);
+
+//BREADS, Rice
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Butter Naan","Indian Bread made with Flour cooked with butter in tandoor","./static/images/23.jpg",60),
+("Jeera Rice","Rice steamed with Jeera","./static/images/24.jpg",90),
+("Veg Pulao","t is a spicy rice dish prepared by cooking rice with various vegetables and spices","./static/images/25.jpg",110),
+("Chicken Pulao","One pot flavored chicken pilaf cooked with mild Indian spices","./static/images/26.jpg",175),
+("Veg Hakka Noodles","It is an Indo-Chinese preparation that is made by tossing boiled noodles and stir fried vegetables in Chinese sauces","./static/images/27.jpg",110),
+("Chicken Hakka Noodles","It is a Chinese dish of boiled noodles tossed with boiled and shredded chicken and vegetables in Chinese sauces","./static/images/28.jpg",150);
+
+INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
+("Chicken Fried Rice", "Made with chicken, eggs, onions, carrots, peas, and rice!", "./static/images/29.jpg", 170),
+("Schezwan Fried Rice", "Blend of rice with vegetables like Bell Peppers, Carrots, French Beans and Spring Onion which are tossed with Soy Sauce and Schezwan Sauce", "./static/images/30.jpg", 150);
