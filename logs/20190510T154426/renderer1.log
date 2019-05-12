@@ -1,0 +1,34 @@
+[2019-05-10 19:18:17.799] [renderer1] [error] Unable to move/copy when source path is equal or parent of target path: Error: Unable to move/copy when source path is equal or parent of target path
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3389:964)
+    at Generator.next (<anonymous>)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:460
+    at new Promise (<anonymous>)
+    at n (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:237)
+    at p.doValidateMoveCopy (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3389:801)
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3388:193)
+    at Generator.next (<anonymous>)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:460
+    at new Promise (<anonymous>)
+    at n (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:237)
+    at p.doMoveCopy (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3388:118)
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3387:540)
+    at Generator.next (<anonymous>)
+    at r (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:293)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+[2019-05-10 19:33:36.630] [renderer1] [error] Unable to move/copy when source path is equal or parent of target path: Error: Unable to move/copy when source path is equal or parent of target path
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3389:964)
+    at Generator.next (<anonymous>)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:460
+    at new Promise (<anonymous>)
+    at n (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:237)
+    at p.doValidateMoveCopy (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3389:801)
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3388:193)
+    at Generator.next (<anonymous>)
+    at file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:460
+    at new Promise (<anonymous>)
+    at n (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:237)
+    at p.doMoveCopy (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3388:118)
+    at p.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:3387:540)
+    at Generator.next (<anonymous>)
+    at r (file:///usr/share/code/resources/app/out/vs/workbench/workbench.main.js:32:293)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
