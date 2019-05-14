@@ -41,24 +41,35 @@
             db.transaction(function (tx) {  
                 tx.executeSql("SELECT i_id,i_qty FROM cart_item", [], function (tx, results){
                     var len = results.rows.length; 
-                    for (i = 0; i < len; i++) { 
+                    if (len > 0) {
+                        for (i = 0; i < len; i++) { 
                         id = parseInt(results.rows.item(i).i_id) - 1;
                         item[id]["i_qty"] = results.rows.item(i).i_qty;
                         
                         cart_item.push(item[id]);
-                    }   
-            
-                    subtotal = 0;
-                    for (i=0; i < cart_item.length; i++) {
-                        $("#cart-items").append("<div class='product'><div class='product-image'><img src='"+cart_item[i].i_image+"'></div><div class='product-details'><div class='product-title' id='title'>"+cart_item[i].i_name+"</div><p class='product-description'>"+cart_item[i].i_description+"</p></div><div class='product-price'>"+cart_item[i].i_price+"</div><div class='product-quantity'><input type='number' value='"+cart_item[i].i_qty+"' onchange='updateItem("+cart_item[i].i_id+", "+cart_item[i].i_price+", )' min='1' id='qty_"+cart_item[i].i_id+"'></div><div class='product-removal'><button class='remove-product' onclick='removeItem("+cart_item[i].i_id+")'>Remove</button></div><div class='product-line-price' id='price_"+cart_item[i].i_id+"'>"+(cart_item[i].i_price)*(cart_item[i].i_qty)+"</div></div>");
-                        subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
+                        }   
+                
+                        subtotal = 0;
+                        for (i=0; i < cart_item.length; i++) {
+                            $("#cart-items").append("<div class='product'><div class='product-image'><img src='"+cart_item[i].i_image+"'></div><div class='product-details'><div class='product-title' id='title'>"+cart_item[i].i_name+"</div><p class='product-description'>"+cart_item[i].i_description+"</p></div><div class='product-price'>"+cart_item[i].i_price+"</div><div class='product-quantity'><input type='number' value='"+cart_item[i].i_qty+"' onchange='updateItem("+cart_item[i].i_id+", "+cart_item[i].i_price+", )' min='1' id='qty_"+cart_item[i].i_id+"'></div><div class='product-removal'><button class='remove-product' onclick='removeItem("+cart_item[i].i_id+")'>Remove</button></div><div class='product-line-price' id='price_"+cart_item[i].i_id+"'>"+(cart_item[i].i_price)*(cart_item[i].i_qty)+"</div></div>");
+                            subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
+                        }
+                        shipping = parseFloat(subtotal)*0.015;
+                        $("#cart-subtotal").html(subtotal.toFixed(2));
+                        $("#cart-shipping").html(shipping.toFixed(2));
+                        tax = (5*subtotal)/100;
+                        $("#cart-tax").html(tax.toFixed(2));
+                        $("#cart-total").html((subtotal+tax+shipping).toFixed(2));
+                        $("#checkout").append('<button id="myButton" class="checkout" onclick="proceedToPay()">Checkout</button>');
+                    } else {
+                        $("#cart-items").html("<h1 align='center'>Cart is empty<h1>");
+                                $("#cart-subtotal").html("0.00");
+                                $("#cart-shipping").html("0.00");
+                                
+                                $("#cart-tax").html("0.00");
+                                $("#cart-total").html("0.00");
                     }
-                    shipping = parseFloat(subtotal)*0.015;
-                    $("#cart-subtotal").html(subtotal.toFixed(2));
-                    $("#cart-shipping").html(shipping.toFixed(2));
-                    tax = (5*subtotal)/100;
-                    $("#cart-tax").html(tax.toFixed(2));
-                    $("#cart-total").html((subtotal+tax+shipping).toFixed(2));
+                    
                 }, null); 
             });
         });
@@ -129,6 +140,21 @@
                     
                     $.post( "order.php", {name: $("#name").val(), phone: $("#phone").val(), cart_item: cart_item, subtotal: $("#cart-subtotal").html(), tax: $("#cart-tax").html(), shipping: $("#cart-shipping").html(), total: $("#cart-total").html()}, function(data, success) {
                         console.log(data+"\nOrder placed!");
+                        alert("ORDER PLACED!");
+                        var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
+
+                        db.transaction(function (tx) {  
+                            tx.executeSql("DROP TABLE cart_item", [], function (tx, results){
+                                $("#cart-items").html("<h1 align='center'>Cart is empty<h1>");
+                                $("#cart-subtotal").html("0.00");
+                                $("#cart-shipping").html("0.00");
+                                
+                                $("#cart-tax").html("0.00");
+                                $("#cart-total").html("0.00");
+                                location.reload();
+                            }, null); 
+                        });
+
                     });
                     
                 }, null); 
@@ -146,9 +172,11 @@
 <body>
     <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
         <nav class="navbar navbar-light bg-light">
+            <a href="index.php">
             <button type="button" class="btn btn-primary">
-                My Cart <span class="badge badge-light" id="cart"></span>
+                Homepage <span class="badge badge-light" id="cart"></span>
             </button>
+            </a>
         </nav>
 
         <h1>Shopping Cart</h1>
@@ -224,8 +252,10 @@
                     <div class="totals-value" id="cart-total">90.57</div>
                 </div>
             </div> 
-
-            <button id="myButton" class="checkout" onclick="proceedToPay()">Checkout</button>
+            <div id="checkout">
+            
+            </div>
+            
             <div id="formDiv"></div>
         </div>
     </div>
