@@ -47,17 +47,18 @@
                         
                         cart_item.push(item[id]);
                     }   
-                    console.log(item);
-                    price = 0;
+            
+                    subtotal = 0;
                     for (i=0; i < cart_item.length; i++) {
-                        $("#cart-items").append("<div class='product'><div class='product-image'><img src='"+cart_item[i].i_image+"'></div><div class='product-details'><div class='product-title' id='title'>"+cart_item[i].i_name+"</div><p class='product-description'>"+cart_item[i].i_description+"</p></div><div class='product-price'>"+cart_item[i].i_price+"</div><div class='product-quantity'><input type='number' value='"+cart_item[i].i_qty+"' onchange='updateItem("+cart_item[i].i_id+")' min='1' id='qty_"+cart_item[i].i_id+"'></div><div class='product-removal'><button class='remove-product' onclick='removeItem("+cart_item[i].i_id+")'>Remove</button></div><div class='product-line-price'>"+cart_item[i].i_price+"</div></div>");
-                        price += (cart_item[i].i_price*1);
+                        $("#cart-items").append("<div class='product'><div class='product-image'><img src='"+cart_item[i].i_image+"'></div><div class='product-details'><div class='product-title' id='title'>"+cart_item[i].i_name+"</div><p class='product-description'>"+cart_item[i].i_description+"</p></div><div class='product-price'>"+cart_item[i].i_price+"</div><div class='product-quantity'><input type='number' value='"+cart_item[i].i_qty+"' onchange='updateItem("+cart_item[i].i_id+", "+cart_item[i].i_price+", )' min='1' id='qty_"+cart_item[i].i_id+"'></div><div class='product-removal'><button class='remove-product' onclick='removeItem("+cart_item[i].i_id+")'>Remove</button></div><div class='product-line-price' id='price_"+cart_item[i].i_id+"'>"+(cart_item[i].i_price)*(cart_item[i].i_qty)+"</div></div>");
+                        subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
                     }
-                    $("#cart-subtotal").html(price.toFixed(2));
-                    tax = (5*price)/100;
+                    shipping = parseFloat(subtotal)*0.15;
+                    $("#cart-subtotal").html(subtotal.toFixed(2));
+                    $("#cart-shipping").html(shipping.toFixed(2));
+                    tax = (5*subtotal)/100;
                     $("#cart-tax").html(tax.toFixed(2));
-                    $("#cart-total").html((price+tax).toFixed(2));
-                    console.log(cart_item.length);
+                    $("#cart-total").html((subtotal+tax+shipping).toFixed(2));
                 }, null); 
             });
         });
@@ -66,18 +67,83 @@
             db.transaction(function (tx) {  
                 tx.executeSql("DELETE FROM cart_item where i_id="+id, [], function (tx, results){
                     location.reload();
-                }, null); 
+                }, null);
+
             });
+
         }
-        function updateItem(id) {
-            value = $("#qty_"+id).value();
+        function updateItem(id, price) {
+            var cart_item = [];
+            var item = <?php echo $item?>;
+            qty = parseInt($("#qty_"+id).val());
+            price = parseFloat(price)*qty;
             var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
             db.transaction(function (tx) {  
-                tx.executeSql("UPDATE cart_item SET i_qty="+value+" where i_id="+id, [], function (tx, results){
+                tx.executeSql("UPDATE cart_item SET i_qty="+qty+" where i_id="+id, [], function (tx, results){
+                    $("#qty_"+id).val(qty);
+                    $("#price_"+id).html(price);
+                }, null); 
+            });
+            db.transaction(function (tx) {  
+                tx.executeSql("SELECT i_id,i_qty FROM cart_item", [], function (tx, results){
+                    var len = results.rows.length;
+                    var subtotal = 0, tax = 0;
+                    for (i = 0; i < len; i++) { 
+                        id = parseInt(results.rows.item(i).i_id) - 1;
+                        item[id]["i_qty"] = results.rows.item(i).i_qty;
+                        cart_item.push(item[id]);
+                        subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
+                    } 
+                    shipping = parseFloat(subtotal)*0.15;
+                    $("#cart-subtotal").html(subtotal.toFixed(2));
+                    $("#cart-shipping").html(shipping.toFixed(2));
+                    tax = (5*subtotal)/100;
+                    $("#cart-tax").html(tax.toFixed(2));
+                    $("#cart-total").html((subtotal+tax+shipping).toFixed(2));
+                    location.reload();
+                }, null);
+            });
+        }
+        
+        function proceedToPay() {
+            document.getElementById("myButton").style.display="none";
+
+            $("#formDiv").append("<form><div class='form-group'><label for='name'>Full name</label><input type='text' class='form-control' id='name' placeholder='Enter full name'></div><div class='form-group'><label for='phnNo'>Phone Number</label><input type='number' class='form-control' id='phone' placeholder='Phone Number'></div><button type='button' class='btn btn-primary' onclick='order()'>Pay Now</button></form>");
+        }
+
+        function order() {
+            var item = <?php echo $item?>;
+            var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
+            db.transaction(function (tx) {  
+                tx.executeSql("SELECT i_id,i_qty FROM cart_item", [], function (tx, results){
+                    var len = results.rows.length;                    
+                    var cart_item = [];
+                    // var item_qty = [];
+                    // var id = 0;
+                    // var qty = 0;
+                    for (i = 0; i < len; i++) { 
+                        // id = parseInt(results.rows.item(i).i_id);
+                        // qty = parseInt(results.rows.item(i).i_qty);
+                        // item_id.push(id);
+                        // item_qty.push(qty);
+                        id = parseInt(results.rows.item(i).i_id) - 1;
+                        item[id]["i_qty"] = results.rows.item(i).i_qty;
+                        
+                        cart_item.push(item[id]);
+                    } 
+
+                    $.post( "order.php", {name: $("#name").val(), phone: $("#phone").val(), cart_item: cart_item, subtotal: $("#cart-subtotal").html(), tax: $("#cart-tax").html(), shipping: $("#cart-shipping").html(), total: $("#cart-total").html()}, function(data, success) {
+                        console.log(data+"\nOrder placed!");
+                    });
                     
                 }, null); 
             });
+            // $.post( "order.php", {name: "Akash", phone: "1234567890", item_id: [1,2,3,4]}, function(data, success) {
+            //     alert(data+"\nOrder placed!");
+            // });
+            // alert("hi");
         }
+
     </script>
 
 </head>

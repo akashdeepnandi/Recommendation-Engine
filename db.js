@@ -5,7 +5,7 @@ db.transaction(function (tx) {
 });
 
 var addToCart = function(i_id) {
-    alert("hi");
+    
     db.transaction(function (tx) { 
         var x = 1;
         tx.executeSql("INSERT INTO cart_item (i_id, i_qty) VALUES (?, ?)",[i_id, x]);
