@@ -53,7 +53,7 @@
                         $("#cart-items").append("<div class='product'><div class='product-image'><img src='"+cart_item[i].i_image+"'></div><div class='product-details'><div class='product-title' id='title'>"+cart_item[i].i_name+"</div><p class='product-description'>"+cart_item[i].i_description+"</p></div><div class='product-price'>"+cart_item[i].i_price+"</div><div class='product-quantity'><input type='number' value='"+cart_item[i].i_qty+"' onchange='updateItem("+cart_item[i].i_id+", "+cart_item[i].i_price+", )' min='1' id='qty_"+cart_item[i].i_id+"'></div><div class='product-removal'><button class='remove-product' onclick='removeItem("+cart_item[i].i_id+")'>Remove</button></div><div class='product-line-price' id='price_"+cart_item[i].i_id+"'>"+(cart_item[i].i_price)*(cart_item[i].i_qty)+"</div></div>");
                         subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
                     }
-                    shipping = parseFloat(subtotal)*0.15;
+                    shipping = parseFloat(subtotal)*0.015;
                     $("#cart-subtotal").html(subtotal.toFixed(2));
                     $("#cart-shipping").html(shipping.toFixed(2));
                     tax = (5*subtotal)/100;
@@ -94,7 +94,7 @@
                         cart_item.push(item[id]);
                         subtotal += parseFloat(cart_item[i].i_price)*(cart_item[i].i_qty);
                     } 
-                    shipping = parseFloat(subtotal)*0.15;
+                    shipping = parseFloat(subtotal)*0.015;
                     $("#cart-subtotal").html(subtotal.toFixed(2));
                     $("#cart-shipping").html(shipping.toFixed(2));
                     tax = (5*subtotal)/100;
@@ -118,20 +118,15 @@
                 tx.executeSql("SELECT i_id,i_qty FROM cart_item", [], function (tx, results){
                     var len = results.rows.length;                    
                     var cart_item = [];
-                    // var item_qty = [];
-                    // var id = 0;
-                    // var qty = 0;
+                    
                     for (i = 0; i < len; i++) { 
-                        // id = parseInt(results.rows.item(i).i_id);
-                        // qty = parseInt(results.rows.item(i).i_qty);
-                        // item_id.push(id);
-                        // item_qty.push(qty);
+                        
                         id = parseInt(results.rows.item(i).i_id) - 1;
                         item[id]["i_qty"] = results.rows.item(i).i_qty;
                         
                         cart_item.push(item[id]);
                     } 
-
+                    
                     $.post( "order.php", {name: $("#name").val(), phone: $("#phone").val(), cart_item: cart_item, subtotal: $("#cart-subtotal").html(), tax: $("#cart-tax").html(), shipping: $("#cart-shipping").html(), total: $("#cart-total").html()}, function(data, success) {
                         console.log(data+"\nOrder placed!");
                     });
