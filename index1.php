@@ -1,21 +1,22 @@
+
 <?php
-include_once "conn.php";
-$categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
+    include_once "conn.php";
+    $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Recommendation Engine</title>
+    <title>Homepage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="db.js"></script>
 </head>
@@ -23,12 +24,8 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 <body>
     <div class="container-fluid" style="padding-bottom:10px">
         <nav class="navbar sticky-top navbar-light bg-light">
-            <a class="navbar-brand" href="index.php">
-                <i class="fas fa-utensils"></i>
-                Recommendation Engine
-            </a>
             <a class="navbar-brand ml-auto" href="cart.php">
-                <button class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-success" id="cart_count"></span></button>
+                <button class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart</button>
             </a>
         </nav>
 
@@ -47,7 +44,8 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
                         <div class="row justify-content-center">
                             <div class="col-xs-4">
                                 <form class="form-inline">
-                                    <input class="form-control mr-sm-3" type="search" placeholder="Search for restaurants or cuisines" aria-label="Search">
+                                    <input class="form-control mr-sm-3" type="search"
+                                        placeholder="Search for restaurants or cuisines" aria-label="Search">
                                     <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                                 </form>
                             </div>
@@ -84,123 +82,96 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 
          -->
 
-        <?php
+<?php
 
         $sql = "SELECT * FROM item;";
         $result = mysqli_query($conn, $sql);
         $item = [];
-        $i = 0;
-
-        while ($row = mysqli_fetch_assoc($result)) {
+        $i=0;
+        
+        while($row = mysqli_fetch_assoc($result)) {
             $item[$i] = $row;
             $i++;
         }
         $id = 1;
         foreach ($categories as $val) {
-            $c = 0;
-
+            $c=0;
+            
             switch ($val) {
                 case 'STARTERS':
-                    $c = 4;
-                    break;
+                $c=4;
+                break;
                 case 'SOUPS':
-                    $c = 2;
-                    break;
+                $c=2;
+                break;
                 case 'MAIN COURSE':
-                    $c = 5;
-                    break;
+                $c=5;
+                break;
                 case 'BREADS AND RICE':
-                    $c = 4;
-                    break;
+                $c=4;
+                break;
             }
-            echo '<div class="row p-2 rounded-left" style="background-color:#5CB85C; margin-left:0px; margin-top:10px; width: 20%"><div class="align-middle" style="color:white">' . $val . '</div></div>';
+            echo '<div class="row p-2 rounded-left" style="background-color:#5CB85C; margin-left:0px; margin-top:10px; width: 20%"><div class="align-middle" style="color:white">'.$val.'</div></div>';
 
-            for ($i = 0; $i < $c; $i++) {
+            for ($i=0; $i < $c; $i++) { 
                 echo '<div class="row" style="margin-top:10px;">
-                <div class="col-md" style="width:auto; height:auto;">
-                    <img id="maincourse_img1" class="img-fluid" style="width:auto; height: auto;" src=' . $item[$id - 1]['i_image'] . '>
+                <div class="col-4" style="width:auto; height:auto;">
+                    <img id="maincourse_img1" class="img-fluid" style="width:auto; height: auto;" src='.$item[$id-1]['i_image'].'>
                 </div>
-                <div class="col-sm">
+                <div class="col-2">
                     <div class="caption">
-                        <h4>' . $item[$id - 1]['i_name'] . '</h4>
+                        <h4>'.$item[$id-1]['i_name'].'</h4>
                         <hr style="margin-top:-5px;">
-
-                        <p id="maincourse_desc1" style="
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        line-height: 1.3;
-                        ">' . $item[$id - 1]['i_description'] . '</p>
-                        
+                        <p id="maincourse_desc1">'.$item[$id-1]['i_description'].'</p>
                         <hr style="margin-top:-5px;">
                         <p class="caption-footer">
-                            <a class="navbar-brand" href="readmore.php?id=' . $item[$id - 1]['i_id'] . '">
+                            <a class="navbar-brand" href="readmore.php?id='.$item[$id-1]['i_id'].'">
                                 <button class="btn btn-outline-info"><i class="fas fa-info-circle"></i> Read More </button>
                             </a>
-                            <button class="btn btn-outline-success" onclick="addToCart(' . $item[$id - 1]['i_id'] . ')" ><i
+                            <button class="btn btn-outline-success" onclick="addToCart('.$item[$id-1]['i_id'].')" ><i
                                     class="fas fa-shopping-cart"></i> Add to
                                 Cart</button>
                         </p>
                     </div>
                 </div>
-                <div class="col-md" style="width:auto; height:auto;">
-                    <img id="maincourse_img2" class="img-fluid" style="width:auto; height: auto;" src=' . $item[$id]['i_image'] . '>
+                <div class="col-4" style="width:auto; height:auto;">
+                    <img id="maincourse_img2" class="img-fluid" style="width:auto; height: auto;" src='.$item[$id]['i_image'].'>
                 </div>
-                <div class="col-sm">
+                <div class="col-2">
                     <div class="caption">
-                        <h4 id="maincourse_title2">' . $item[$id]['i_name'] . '</h4>
+                        <h4 id="maincourse_title2">'.$item[$id]['i_name'].'</h4>
                         <hr style="margin-top:-5px;">
-
-                        <p id="maincourse_desc2" style="
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        line-height: 1.3;
-                        ">' . $item[$id]['i_description'] . '</p>
-                        
+                        <p id="maincourse_desc2">'.$item[$id]['i_description'].'</p>
                         <hr style="margin-top:-5px;">
                         <p class="caption-footer">
-                        <a class="navbar-brand" href="readmore.php?id=' . $item[$id]['i_id'] . '">
+                        <a class="navbar-brand" href="readmore.php?id='.$item[$id]['i_id'].'">
                                 <button class="btn btn-outline-info"><i class="fas fa-info-circle"></i> Read More </button>
                             </a>
-                            <button class="btn btn-outline-success" onclick="addToCart(' . $item[$id]['i_id'] . ')"><i
+                            <button class="btn btn-outline-success" onclick="addToCart('.$item[$id]['i_id'].')"><i
                                     class="fas fa-shopping-cart"></i> Add to
                                 Cart</button>
                         </p>
                     </div>
                 </div>
-
             </div>';
-                $id += 2;
+            $id+=2;
             }
         }
 
-        ?>
-
+?>        
+ 
 
         <!-----------------------------------STARTER SELECTION ENDS--------------------------------------->
 
 
-    </div> <!-- container ends here -->
-
+    </div>  <!-- container ends here -->
+    
 </body>
 
 <script>
-    var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
-    var len;
-    db.transaction(function(tx) {
-        tx.executeSql('SELECT * FROM cart_item', [], function(tx, results) {
-            len = results.rows.length;
-            document.querySelector('#cart_count').innerHTML += len;
-        }, null);
-    });
 
     $('.carousel').carousel({
-        interval: 5000
+        interval: 2000
     })
 </script>
 

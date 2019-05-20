@@ -33,9 +33,6 @@
                 <i class="fas fa-info-circle"></i>
                 Item Details
             </a>
-            <a class="navbar-brand ml-auto" href="cart.php">
-                <button class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-success" id="cart_count"></span></button>
-            </a>
         </nav>
 
         <div class="row" style="margin-top:10px;">
@@ -55,16 +52,5 @@
         </div>
     </div>
 </body>
-
-<script>
-    var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
-    var len;
-    db.transaction(function(tx) {
-        tx.executeSql('SELECT * FROM cart_item', [], function(tx, results) {
-            len = results.rows.length;
-            document.querySelector('#cart_count').innerHTML += len;
-        }, null);
-    });
-</script>
 
 </html>
