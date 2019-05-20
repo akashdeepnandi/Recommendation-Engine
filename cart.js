@@ -91,12 +91,7 @@ $(document).ready(function () {
 
 });
 
-function proceedToPay() {
-    console.log("This is the checkout button");
-    document.getElementById("myButton").style.display="none";
 
-    $("#formDiv").append("<form><div class='form-group'><label for='name'>Full name</label><input type='text' class='form-control' id='exampleInputEmail1' placeholder='Enter full name'></div><div class='form-group'><label for='phnNo'>Phone Number</label><input type='number' class='form-control' id='phoneNo' placeholder='Phone Number'></div><button type='submit' class='btn btn-primary'>Pay Now</button></form>");
-}
 
 
 

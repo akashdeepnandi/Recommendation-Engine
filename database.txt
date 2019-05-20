@@ -117,3 +117,37 @@ INSERT INTO item(i_name, i_description, i_image, i_price) VALUES ("Butter Naan",
 INSERT INTO item(i_name, i_description, i_image, i_price) VALUES 
 ("Chicken Fried Rice", "Made with chicken, eggs, onions, carrots, peas, and rice!", "./static/images/29.jpg", 170),
 ("Schezwan Fried Rice", "Blend of rice with vegetables like Bell Peppers, Carrots, French Beans and Spring Onion which are tossed with Soy Sauce and Schezwan Sauce", "./static/images/30.jpg", 150);
+
+purchase_items~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CREATE TABLE purchase_items(
+	pi_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_id int(11) NOT NULL,
+   	p_id int(11) NOT NULL,
+   	i_id int(11) NOT NULL,
+    qty int NOT NULL,
+    total_price float NOT NULL
+);
+
+customers~~~~~~~~~~~~~~~~~~~~
+
+CREATE TABLE customer(
+	c_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_name varchar(128) NOT NULL,
+   	c_phone varchar(10) NOT NULL
+);
+
+
+
+purchase~~~~~~~~~~~~~~~~~~~~~~~~~~`
+CREATE TABLE purchase(
+	p_id int(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    c_id int(11) NOT NULL,
+    p_subtotal float NOT NULL,
+    p_tax float NOT NULL,
+    p_shipping float NOT NULL,
+    p_total float NOT NULL
+);
+
+<label for='name'>Full name</label><input type='text' class='form-control' id='name' placeholder='Enter full name'></div><div class='form-group'><label for='phnNo'>Phone Number</label><input type='number' class='form-control' id='phone' placeholder='Phone Number'></div><button type='button' class='btn btn-primary' onlick='order()'>Pay Now</button>
+
+"<form><div class='form-group'><label for='name'>Full name</label><input type='text' class='form-control' id='name' placeholder='Enter full name'></div><div class='form-group'><label for='phnNo'>Phone Number</label><input type='number' class='form-control' id='phone' placeholder='Phone Number'></div><button type='button' class='btn btn-primary' onclick='order()'>Pay Now</button></form>"
