@@ -199,6 +199,15 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
         }, null);
     });
 
+    function addToCart(i_id) {
+    
+        db.transaction(function (tx) { 
+            var x = 1;
+            tx.executeSql("INSERT INTO cart_item (i_id, i_qty) VALUES (?, ?)",[i_id, x]);
+            location.reload();
+        });
+    }
+
     $('.carousel').carousel({
         interval: 5000
     })

@@ -65,6 +65,13 @@
             document.querySelector('#cart_count').innerHTML += len;
         }, null);
     });
+    function addToCart(i_id) {   
+        db.transaction(function (tx) { 
+            var x = 1;
+            tx.executeSql("INSERT INTO cart_item (i_id, i_qty) VALUES (?, ?)",[i_id, x]);
+            location.reload();
+        });
+    }
 </script>
 
 </html>
