@@ -123,6 +123,7 @@
         }
 
         function order() {
+            document.getElementById("formDiv").style.display="none";
             var item = <?php echo $item?>;
             var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
             db.transaction(function (tx) {  

@@ -191,7 +191,7 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 
 <script>
     var db = openDatabase('cart_db', '1.0', 'Cart DB', 2 * 1024 * 1024);
-    var len;
+
     db.transaction(function(tx) {
         tx.executeSql('SELECT * FROM cart_item', [], function(tx, results) {
             len = results.rows.length;
@@ -199,15 +199,14 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
         }, null);
     });
 
-    function addToCart(i_id) {
-    
+    function addToCart(i_id) {   
         db.transaction(function (tx) { 
             var x = 1;
             tx.executeSql("INSERT INTO cart_item (i_id, i_qty) VALUES (?, ?)",[i_id, x]);
             location.reload();
         });
     }
-
+    
     $('.carousel').carousel({
         interval: 5000
     })
