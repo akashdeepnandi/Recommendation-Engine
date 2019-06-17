@@ -24,26 +24,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+        a:hover {
+            text-decoration: none;
+            color: #5CB85C;
+        }
+    </style>
 </head>
 
 <body>
-<div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
+<!-- <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
         <nav class="navbar navbar-light bg-light">
             <a href="index.php">
             <button type="button" class="btn btn-primary">
                 Homepage <span class="badge badge-light" id="cart"></span>
             </button>
             </a>
-        </nav>
+        </nav> -->
     <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-info-circle"></i>
                 Item Details
             </a>
-            <a class="navbar-brand ml-auto" href="cart.php">
+
+            <a class="navbar-brand ml-auto" href="index.php">
+                <button class="btn btn-outline-primary"><i class="fas fa-home"></i> Home <span class="badge badge-primary"></span></button>
+            </a>
+
+            <a class="navbar-brand float-right" href="cart.php">
                 <button class="btn btn-outline-success"><i class="fas fa-shopping-cart"></i> Cart <span class="badge badge-success" id="cart_count"></span></button>
             </a>
+
+            
         </nav>
 
         <div class="row" style="margin-top:10px;">
@@ -61,9 +74,10 @@
                     Cart</button>
             </div>
         </div>
-    </div>
-    <div>
-        <h1>Recommendations</h1>
+    
+    
+        <div class="row p-2 rounded-left" style="background-color:#5CB85C; border-radius:100%; margin-left:0px; margin-top:5px; margin-bottom:10px; width: 20%"><div class="align-middle" style="color:white">RECOMMENDATIONS</div></div>
+        <div>
         <?php
             $file = fopen("rules.csv","r");
             $items = [];
@@ -86,15 +100,22 @@
                     $sql = "SELECT * FROM item WHERE i_id='$item[1]'";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
-                    echo $row['i_name']."<br>";
+    
+
+                    echo "<div style='display:inline-block'><a href='readmore.php?id=".$row['i_id']."'><img src=".$row['i_image']." class='img-fluid float-left' style='padding-right:20px;width:400px; margin-bottom:5px'><h4 align='center'>".$row['i_name']."</h4></a></div>";
                     $i++;
                 }
             }
             
             
+            
             fclose($file);
         ?>
+        </div>
+        
+
     </div>
+
 </body>
 
 <script>
