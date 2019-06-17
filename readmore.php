@@ -27,6 +27,14 @@
 </head>
 
 <body>
+<div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
+        <nav class="navbar navbar-light bg-light">
+            <a href="index.php">
+            <button type="button" class="btn btn-primary">
+                Homepage <span class="badge badge-light" id="cart"></span>
+            </button>
+            </a>
+        </nav>
     <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
@@ -49,10 +57,42 @@
                 <h1 id = "starter_title1"><?php echo $name;?></h1>
                 <h3><?php echo $description;?></h3>
                 <h4 id="price">Price: ₹ <?php echo $price;?></h4>
-                <button type="button" class="btn btn-success btn-lg" onclick="addToCart(document.getElementById('starter_title1').innerText, document.getElementById('price').innerText, document.getElementById('img1').src)"><i class="fas fa-shopping-cart"></i> Add To
+                <button type="button" class="btn btn-success btn-lg" onclick="addToCart()"><i class="fas fa-shopping-cart"></i> Add To
                     Cart</button>
             </div>
         </div>
+    </div>
+    <div>
+        <h1>Recommended!</h1>
+        <?php
+            $file = fopen("rules.csv","r");
+            $items = [];
+            while(! feof($file)) {
+                $arr = fgetcsv($file);
+                if ($arr[0] == $id) {
+                    array_push($items, $arr);
+                }
+            }
+            $temp = [];
+            for ($i = sizeof($items)-1, $j = 0; $i >=0 ; $i--, $j++) { 
+                $temp[$j] = $items[$i];            
+            }
+            $items = $temp;
+            $i = 0;
+            
+            foreach ($items as $item) {
+                if($i < 3) {
+                    $sql = "SELECT * FROM item WHERE i_id='$item[1]'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    echo $row['i_name']."<br>";
+                    $i++;
+                }
+            }
+            
+            
+            fclose($file);
+        ?>
     </div>
 </body>
 
@@ -65,7 +105,8 @@
             document.querySelector('#cart_count').innerHTML += len;
         }, null);
     });
-    function addToCart(i_id) {   
+    function addToCart() {  
+        i_id = <?php echo $_GET['id']; ?> 
         db.transaction(function (tx) { 
             var x = 1;
             tx.executeSql("INSERT INTO cart_item (i_id, i_qty) VALUES (?, ?)",[i_id, x]);
