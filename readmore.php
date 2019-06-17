@@ -63,11 +63,11 @@
         </div>
     </div>
     <div>
-        <h1>Recommended!</h1>
+        <h1>Recommendations</h1>
         <?php
             $file = fopen("rules.csv","r");
             $items = [];
-            while(! feof($file)) {
+            while(! feof($file)) { //rules in items
                 $arr = fgetcsv($file);
                 if ($arr[0] == $id) {
                     array_push($items, $arr);
@@ -78,6 +78,7 @@
                 $temp[$j] = $items[$i];            
             }
             $items = $temp;
+
             $i = 0;
             
             foreach ($items as $item) {
