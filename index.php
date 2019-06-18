@@ -1,5 +1,5 @@
 <?php
-include_once "conn.php";
+include_once "./includes/conn.php";
 $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 ?>
 
@@ -213,47 +213,3 @@ $categories = ["STARTERS", "SOUPS", "MAIN COURSE", "BREADS AND RICE"];
 </script>
 
 </html>
-
-
-<!-- 
-    <div class="row" style="margin-top:10px;">
-            <div class="col-4" style="width:auto; height:auto;">
-                <img id="starter_img1" class="img-fluid" style="width:auto; height: auto;" src="./img/starter.jpg">
-            </div>
-            <div class="col-2">
-                <div class="caption">
-                    <h4 id="starter_title1">abc</h4>
-                    <hr style="margin-top:-5px;">
-                    <p id="starter_desc1">asfhghkdfadaasdasda</p>
-                    <hr style="margin-top:-5px;">
-                    <p class="caption-footer">
-                        <button type="button" class="btn btn-outline-info"><i class="fas fa-info-circle"></i> Read More 1
-                        </button>
-                        <button class="btn btn-outline-success" style="margin-top:5px"><i
-                                class="fas fa-shopping-cart"></i> Add to
-                            Cart</button>
-                    </p>
-                </div>
-            </div>
-            
-            <div class="col-4" style="width:auto; height:auto;">
-                <img id="starter_img1" class="img-fluid" style="width:auto; height: auto;" src="./img/starter.jpg">
-            </div>
-            <div class="col-2">
-                <div class="caption">
-                    <h4 id="starter_title1">def</h4>
-                    <hr style="margin-top:-5px;">
-                    <p id="starter_desc1">asfhghkdfadaasdasda</p>
-                    <hr style="margin-top:-5px;">
-                    <p class="caption-footer">
-                        <button type="button" class="btn btn-outline-info"><i class="fas fa-info-circle"></i> Read More 1
-                        </button>
-                        <button class="btn btn-outline-success" style="margin-top:5px"><i
-                                class="fas fa-shopping-cart"></i> Add to
-                            Cart</button>
-                    </p>
-                </div>
-            </div>
-
-        </div>
- -->

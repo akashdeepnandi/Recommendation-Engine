@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    include_once "conn.php";
+    include_once "./includes/conn.php";
     $sql = "SELECT * FROM item;";
     $result = mysqli_query($conn, $sql); //item data fetched
     $item = [];
@@ -138,7 +138,7 @@
                         
                         cart_item.push(item[id]);
                     } 
-                    
+                    //AJAX
                     $.post( "order.php", {name: $("#name").val(), phone: $("#phone").val(), cart_item: cart_item, subtotal: $("#cart-subtotal").html(), tax: $("#cart-tax").html(), shipping: $("#cart-shipping").html(), total: $("#cart-total").html()}, function(data, success) {
                         console.log(data+"\nOrder placed!");
                         alert("ORDER PLACED!");
@@ -160,10 +160,6 @@
                     
                 }, null); 
             });
-            // $.post( "order.php", {name: "Akash", phone: "1234567890", item_id: [1,2,3,4]}, function(data, success) {
-            //     alert(data+"\nOrder placed!");
-            // });
-            // alert("hi");
         }
 
     </script>
@@ -195,46 +191,7 @@
 
             <div id="cart-items"></div>
 
-            <!-- <div class="product">
-                <div class="product-image">
-                    <img src="img/starter.jpg">
-                </div>
-                <div class="product-details">
-                    <div class="product-title" id="title">Starter 1</div>
-                    <p class="product-description"> Tasty</p>
-                </div>
-                <div class="product-price">12.99</div>
-                <div class="product-quantity">
-                    <input type="number" value="2" min="1">
-                </div>
-                <div class="product-removal">
-                    <button class="remove-product">
-                        Remove
-                    </button>
-                </div>
-                <div class="product-line-price">25.98</div>
-            </div>
-
-            <div class="product">
-                <div class="product-image">
-                    <img src="img/starter.jpg">
-                </div>
-                <div class="product-details">
-                    <div class="product-title">Starter 2</div>
-                    <p class="product-description">Delicious</p>
-                </div>
-                <div class="product-price">45.99</div>
-                <div class="product-quantity">
-                    <input type="number" value="1" min="1">
-                </div>
-                <div class="product-removal">
-                    <button class="remove-product">
-                        Remove
-                    </button>
-                </div>
-                <div class="product-line-price">45.99</div>
-            </div> -->
-
+    
             <div class="totals">
                 <div class="totals-item">
                     <label>Subtotal</label>

@@ -1,5 +1,5 @@
 <?php
-    include_once "conn.php";
+    include_once "./includes/conn.php";
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $cart_item = $_POST['cart_item'];

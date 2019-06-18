@@ -1,5 +1,5 @@
 <?php
-    include_once "conn.php";
+    include_once "./includes/conn.php";
     $id = $_GET['id'];
     $sql = "SELECT * FROM item WHERE i_id='$id'";
     $result = mysqli_query($conn, $sql);
@@ -33,14 +33,7 @@
 </head>
 
 <body>
-<!-- <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
-        <nav class="navbar navbar-light bg-light">
-            <a href="index.php">
-            <button type="button" class="btn btn-primary">
-                Homepage <span class="badge badge-light" id="cart"></span>
-            </button>
-            </a>
-        </nav> -->
+
     <div class="container-fluid" style="padding-bottom:10px; padding-top: 10px">
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
